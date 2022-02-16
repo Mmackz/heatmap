@@ -7,7 +7,7 @@ d3.select(".chart-outer")
 
 // setup chart
 const height = 380;
-const width = 1200;
+const width = 1300;
 const paddingY = 60;
 const paddingX = 100;
 const colorScheme = [
@@ -89,7 +89,7 @@ d3.json(
    const [minTemp, maxTemp] = d3.extent(variance.map((v) => v.variance + baseTemp));
    const rangeStep = (maxTemp - minTemp) / colorScheme.length;
    const rangeDomain = [...new Array(11).keys()].map((i) => minTemp + i * rangeStep);
-   const colorScale = d3.scaleThreshold().domain(rangeDomain).range(colorScheme);
+   const colorScale = d3.scaleThreshold().domain(rangeDomain.slice(1)).range(colorScheme);
    console.log(colorScale(5));
 
    chart
