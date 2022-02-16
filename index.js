@@ -6,10 +6,10 @@ d3.select(".chart-outer")
    .style("opacity", "0");
 
 // setup chart
-const height = 380;
+const height = 400;
 const width = 1300;
-const paddingY = 60;
-const paddingX = 100;
+const paddingY = 80;
+const paddingX = 140;
 const colorScheme = [
    "#a50026",
    "#d73027",
@@ -69,7 +69,15 @@ d3.json(
       .append("g")
       .call(yAxis)
       .attr("id", "y-axis")
-      .attr("transform", "translate(60, 20)");
+      .attr("transform", `translate(${paddingX / 2 + 30}, 20)`);
+
+   chart
+      .append("g")
+      .attr("transform", "translate(30, 240)")
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .style("font-size", "smaller")
+      .text("months");
 
    // years (x-axis)
    const years = [...new Set(variance.map((m) => m.year))];
@@ -83,7 +91,14 @@ d3.json(
       .append("g")
       .call(xAxis)
       .attr("id", "x-axis")
-      .attr("transform", `translate(60, ${height + 20})`);
+      .attr("transform", `translate(${paddingX / 2 + 30}, ${height + 20})`);
+
+   chart
+      .append("g")
+      .attr("transform", `translate(${(width + paddingX) / 2}, ${height + paddingY - 20})`)
+      .append("text")
+      .style("font-size", "smaller")
+      .text("years");
 
    // temperature data
    const [minTemp, maxTemp] = d3.extent(variance.map((v) => v.variance + baseTemp));
@@ -98,12 +113,12 @@ d3.json(
       .enter()
       .append("rect")
       .attr("class", "cell")
-      .attr("transform", "translate(60,20)")
+      .attr("transform", `translate(${paddingX / 2 + 30},20)`)
       .attr("data-month", (d) => d.month)
       .attr("data-year", (d) => d.year)
       .attr("y", (d) => yAxisScale(d.month - 1))
       .attr("x", (d) => xAxisScale(d.year))
       .attr("height", (d) => yAxisScale.bandwidth(d.month - 1))
       .attr("width", (d) => xAxisScale.bandwidth(d.year))
-      .attr("fill", d => colorScale(baseTemp + d.variance));
+      .attr("fill", (d) => colorScale(baseTemp + d.variance));
 });
