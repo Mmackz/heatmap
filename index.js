@@ -127,7 +127,6 @@ d3.json(
          const xValue = xAxisScale(d.year);
          const yValue = yAxisScale(d.month - 1);
          const format = d3.timeFormat("%B");
-         console.log(xValue);
          d3
             .select("#tooltip")
             .attr("data-year", d.year)
