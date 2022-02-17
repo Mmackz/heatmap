@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@400;700&display=swap');
+
+body {
+   margin: 0;
+   font-family: 'Fira Sans Condensed', sans-serif;
+}
+
+h1 {
+   margin: 0.5rem;
+}
+
+p {
+   margin: 0;
+}
+
+.chart, .chart-outer {
+   width: fit-content;
+   margin: 0 auto;
+}
+
+.chart-outer {
+   position: relative;
+}
+
+.title-container {
+   text-align: center;
+   padding-top: 1rem;
+}
+
+.tooltip {
+   position: absolute;
+   background: gainsboro;
+   border-radius: 9px;
+   width: 180px;
+   padding: 0.75rem;
+}
+
+.tooltip::after {
+   content: "";
+   position: absolute;
+   width: 0;
+   height: 0;
+   border-top: 0.475rem gainsboro solid;
+   border-right: 0.475rem transparent solid;
+   border-left: 0.475rem transparent solid;
+   top: 98px;
+   left: 94px;
+}
+
+.tooltip > p {
+   margin: 0.1rem;
+}
+
+.tt-label {
+   font-size: 0.85rem;
+   font-weight: bold;
+   letter-spacing: -0.3px;
+   margin-right: 0.2rem;
+}
+
+.cell:hover {
+   stroke: black;
+   stroke-width: 1px;
+}
