@@ -150,8 +150,7 @@ d3.json(
    // legend
    const legendScale = d3.scaleLinear().domain([minTemp, maxTemp]).range([0, 400]);
    const legendAxis = d3
-      .axisBottom()
-      .scale(legendScale)
+      .axisBottom(legendScale)
       .tickValues(colorScale.domain())
       .tickSize(9)
       .tickFormat(d3.format(".1f"));
@@ -192,13 +191,7 @@ d3.json(
 
    function setRange(color) {
       const extent = colorScale.invertExtent(color);
-      if (extent[0] === undefined) {
-         extent[0] = minTemp;
-      }
-      if (extent[1] === undefined) {
-         extent[1] = maxTemp;
-      }
-      return extent;
+      return extent[0] ?? minTemp;
    }
 
    legend
@@ -209,9 +202,9 @@ d3.json(
       .append("rect")
       .attr("height", 30)
       .attr("width", 400 / colorScale.range().length)
-      .attr("x", (d) => legendScale(d[0]))
+      .attr("x", (d) => legendScale(d))
       .attr("transform", "translate(0, -30)")
-      .attr("fill", (d) => colorScale(d[0]))
+      .attr("fill", (d) => colorScale(d))
       .style("stroke", "black")
       .style("stroke-width", "1px");
 });
